@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 
 @Module({
   imports: [],
-  controllers: [AppController],
+  controllers: [AppController], //controller는 nodejs의 express와 같은 존재
   providers: [AppService],
 })
 export class AppModule {}
