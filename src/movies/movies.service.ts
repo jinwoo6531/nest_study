@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Movie } from './entities/movie.entity';
 import { NotFoundException } from '@nestjs/common';
+import { CreateMovieDto } from './dto/create-movie.dto';
 
 @Injectable()
 export class MoviesService {
@@ -27,7 +28,7 @@ export class MoviesService {
   }
 
   //생성(test)
-  create(movieData) {
+  create(movieData: CreateMovieDto) {
     this.movies.push({
       id: this.movies.length + 1,
       ...movieData,
