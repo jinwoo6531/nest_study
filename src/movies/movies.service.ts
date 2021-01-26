@@ -13,8 +13,8 @@ export class MoviesService {
   }
 
   //id값 하나 가져오기
-  getOne(id: string): Movie {
-    const movie = this.movies.find((movie) => movie.id === +id);
+  getOne(id: number): Movie {
+    const movie = this.movies.find((movie) => movie.id === id);
     if (!movie) {
       throw new NotFoundException(`Movie whit ID ${id} not found`);
     }
@@ -22,9 +22,9 @@ export class MoviesService {
   }
 
   //삭제
-  deleteOne(id: string) {
+  deleteOne(id: number) {
     this.getOne(id);
-    this.movies = this.movies.filter((movie) => movie.id !== +id);
+    this.movies = this.movies.filter((movie) => movie.id !== id);
   }
 
   //생성(test)
@@ -36,7 +36,7 @@ export class MoviesService {
   }
 
   //수정
-  update(id: string, updateData) {
+  update(id: number, updateData) {
     const movie = this.getOne(id);
     this.deleteOne(id);
     this.movies.push({ ...movie, ...updateData });
