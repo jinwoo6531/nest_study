@@ -26,7 +26,7 @@ export class MoviesService {
     this.movies = this.movies.filter((movie) => movie.id !== +id);
   }
 
-  //생성
+  //생성(test)
   create(movieData) {
     this.movies.push({
       id: this.movies.length + 1,
