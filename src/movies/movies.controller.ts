@@ -14,39 +14,31 @@ import {
 
 @Controller('movies')
 export class MoviesController {
-  constructor(private movieService: MoviesService) {}
+  constructor(private readonly moviesService: MoviesService) {}
 
   @Get()
-  getAll() {
-    return 'This will return all movies';
-  }
-
-  @Get('search')
-  search(@Query('year') searchingYear: string) {
-    return `We are searching for a movie made after: ${searchingYear}`;
+  getAll(): Movie[] {
+    return this.moviesService.getAll();
   }
 
   //@Param을 통해 url의 id값을 불러올수있다.
   @Get('/:id')
-  getOne(@Param('id') id: string) {
-    return `This will return one movie ${id}`;
+  getOne(@Param('id') movieId: number): Movie {
+    return this.moviesService.getOne(movieId);
   }
 
   @Post()
-  create(@Body() createMovieDto: CreateMovieDto) {
-    return this.movieService.create(createMovieDto);
+  create(@Body() movieData: CreateMovieDto) {
+    return this.moviesService.create(movieData);
   }
 
   @Delete('/:id')
-  remove(@Param('id') movieId: string) {
-    return `This will delete a movie whit the id : ${movieId}`;
+  remove(@Param('id') movieId: number) {
+    return this.moviesService.deleteOne(movieId);
   }
 
   @Patch('/:id')
-  patch(@Param('id') movieId: string, @Body() updateData) {
-    return {
-      updatedMovie: movieId,
-      ...updateData,
-    };
+  patch(@Param('id') movieId: number, @Body() updateData) {
+    return this.moviesService.update(movieId, updateData);
   }
 }
