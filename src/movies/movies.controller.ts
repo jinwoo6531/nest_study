@@ -1,3 +1,5 @@
+import { MoviesService } from './movies.service';
+import { CreateMovieDto } from './dto/create-movie.dto';
 import {
   Controller,
   Delete,
@@ -12,6 +14,8 @@ import {
 
 @Controller('movies')
 export class MoviesController {
+  constructor(private movieService: MoviesService) {}
+
   @Get()
   getAll() {
     return 'This will return all movies';
@@ -29,9 +33,8 @@ export class MoviesController {
   }
 
   @Post()
-  create(@Body() movieData) {
-    console.log(movieData);
-    return movieData;
+  create(@Body() createMovieDto: CreateMovieDto) {
+    return this.movieService.create(createMovieDto);
   }
 
   @Delete('/:id')
